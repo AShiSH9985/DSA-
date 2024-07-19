@@ -1,33 +1,39 @@
-public class linkl{
+public class doublell {
     Node head;
-    class Node{
+   class Node{
         int data;
+        Node prev;
         Node next;
-        Node(int x){
-            data=x;
-            next=null;
-        }
+     Node(int x){
+        data=x;
+        prev=null;
+        next=null;
+     }
     }
     void addfirst(int x){
-        Node newN=new Node(x);
+        Node newnode=new Node(x);
         if(head==null){
-            head=newN;
+            head=newnode;
             return;
         }
-        newN.next=head;
-        head=newN;
+        newnode.next=head;
+        head.prev=newnode;
+        head=newnode;
     }
+
     void addlast(int x){
-        Node data=new Node(x);
+        Node newnode=new Node(x);
         if(head==null){
-            head=data;
+            head=newnode;
             return;
         }
         Node last=head;
         while(last.next!=null){
             last=last.next;
         }
-        last.next=data;
+        last.next=newnode;
+        newnode.prev=last;
+        newnode.next=null;
     }
 
     void delfirst(){
@@ -35,9 +41,9 @@ public class linkl{
             System.out.println("list is empty");
             return;
         }
-        head=head.next;
+        head.next=null;
+        head.prev=null;
     }
-
 
     void dellast(){
         if(head==null){
@@ -51,11 +57,13 @@ public class linkl{
             check=last;
         }
         check.next=null;
+        last.prev=null;
     }
 
     void print(){
         if(head==null){
             System.out.println("list is empty");
+            return;
         }
         Node last=head;
         while(last!=null){
@@ -63,14 +71,15 @@ public class linkl{
             last=last.next;
         }
     }
-
-public static void main(String[] args) {
-    linkl list=new linkl();
-    list.addfirst(1);
-    list.addfirst(10);
-    list.addfirst(20);
-   
-    list.print();
     
-}
+    public static void main(String[] args) {
+        doublell list=new doublell();
+        list.addfirst(50);
+        list.addfirst(20);
+        list.addlast(10);
+        list.print();
+        System.out.println();
+      // list.delfirst();
+       // list.print();
+    }
 }
